@@ -6,7 +6,7 @@ use colored::*;
 pub fn add_new_deck() {
     let deck_name = get_deck_name();
     let mut deck: model::Deck = model::Deck {
-        name: deck_name,
+        name: deck_name.clone(),
         cards: Vec::new(),
     };
 
@@ -23,6 +23,9 @@ pub fn add_new_deck() {
     std::fs::write(file, json).unwrap();
 
     loop {
+        cli::clear_screen();
+        cli::print_header();
+        println!("{} {}", "\nAdding a new card to".yellow().bold(), deck_name.magenta().bold());
         println!(
             "{}",
             "What do you want on the front of the card?".yellow().bold()
